@@ -6,7 +6,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FriendshipStatus {
-    private String userId;
+public class FriendshipQueryResult {
+    private Long id;
+    private String friendId;
     private String status;
 }

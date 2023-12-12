@@ -1,5 +1,6 @@
 package com.tuxedo.friendship_service.services;
 
+import com.tuxedo.friendship_service.model.dtos.FriendshipQueryResult;
 import com.tuxedo.friendship_service.model.dtos.UserCreateRequest;
 import com.tuxedo.friendship_service.model.dtos.UserFriendshipResponse;
 import com.tuxedo.friendship_service.model.entities.Friendship;
@@ -10,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Service
@@ -41,20 +45,28 @@ public class FriendshipService {
     }
 
     public UserFriendshipResponse getFriendship(String id, String friendId) {
-        var friendship = friendshipRepository.getFriendshipByUsers(id, friendId);
-        return UserFriendshipResponse.fromFriendship(friendship);
+var user = userRepository.findByUserId(id);
+        var friend = userRepository.findByUserId(friendId);
+        Set<Friendship> friendships = user.getFriends();
+        for (Friendship f : friend.getFriends()) {
+            if (f.getFriend().getUserId().equals(id)) {
+                friendships.add(f);
+            }
+        }
+        return friendships.stream()
+                .filter(friendship -> friendship.getFriend().getUserId().equals(friendId))
+                .map(UserFriendshipResponse::fromFriendship)
+                .findFirst()
+                .orElseThrow();
     }
 
     public List<UserFriendshipResponse> getFriendships(String id) {
-        var friendships = friendshipRepository.getFriendshipsByUsers(id);
-        for (Friendship friendship : friendships) {
-            log.info(friendship.toString());
-        }
-        log.info(friendships.toString());
-        return List.of();
-        //return friendships.stream()
-        //        .map(UserFriendshipResponse::fromFriendship)
-        //        .toList();
+
+        var friendships = friendshipRepository.getFriendshipsByUser(id);
+        // Map all friendships iterator to UserFriendshipResponse
+        return friendships.stream()
+                .map(UserFriendshipResponse::fromFriendshipQueryResult)
+                .collect(Collectors.toList());
     }
 
 

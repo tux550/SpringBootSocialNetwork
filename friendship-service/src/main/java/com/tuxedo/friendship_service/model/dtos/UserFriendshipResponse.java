@@ -20,4 +20,11 @@ public class UserFriendshipResponse {
                 .status(friendship.getStatus())
                 .build();
     }
+
+    public static UserFriendshipResponse fromFriendshipQueryResult(FriendshipQueryResult friendshipQueryResult) {
+        return UserFriendshipResponse.builder()
+                .friendId(friendshipQueryResult.getFriendId())
+                .status(friendshipQueryResult.getStatus())
+                .build();
+    }
 }
