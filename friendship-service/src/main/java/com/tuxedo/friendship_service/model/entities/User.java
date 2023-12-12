@@ -1,29 +1,39 @@
 package com.tuxedo.friendship_service.model.entities;
 import lombok.*;
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
-import java.util.List;
 import java.util.Set;
 
 
 @Node
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class User {
-    @Id
+    @Id @GeneratedValue
+    private Long id;
     private String userId;
-    @Relationship(type = "FRIENDS_WITH")
-    private Set<User> friends;
+    @Relationship(type = "FRIENDS_WITH", direction = Relationship.Direction.OUTGOING)
+    private Set<Friendship> friends;
 
-    public void friendsWith(User friend) {
-        if (this.friends == null){
-            this.friends = Set.of();
+    public void addFriend(Friendship friendship) {
+        if (friends == null) {
+            friends = Set.of();
         }
-        this.friends.add(friend);
+        friends.add(friendship);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userId='" + userId + '\'' +
+                ", friends=" + friends +
+                '}';
     }
 }

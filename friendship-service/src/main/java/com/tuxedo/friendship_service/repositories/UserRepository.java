@@ -5,8 +5,7 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 
 import java.util.List;
 
-public interface UserRepository extends Neo4jRepository<User, String> {
+public interface UserRepository extends Neo4jRepository<User, Long> {
     User findByUserId(String userId);
-    List<User> findByFriendsUserId(String userId);
 }
 
