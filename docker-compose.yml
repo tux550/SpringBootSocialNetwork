@@ -1,0 +1,15 @@
+version: '3'
+services:
+    db-users:
+        container_name: db-users
+        image: postgres:15.2
+        restart: unless-stopped
+        environment:
+        - POSTGRES_DB=ms_users
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+        ports:
+        - '5431:5431'
+        expose:
+          - 5431
+        command: -p 5431
