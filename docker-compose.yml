@@ -32,6 +32,22 @@ services:
         command: --port 27018
         networks:
         - ms-network
+    #MongoDB Comments Database
+    db-comments:
+        container_name: db-comments
+        image: mongo:5.0.14
+        restart: unless-stopped
+        environment:
+            - MONGO_INITDB_DATABASE=ms_comments
+            - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+            - MONGO_INITDB_ROOT_PASSWORD=mongoadmin
+        ports:
+            - '27019:27019'
+        expose:
+            - 27019
+        command: --port 27019
+        networks:
+            - ms-network
 #Network
 networks:
     ms-network:
