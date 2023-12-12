@@ -20,10 +20,10 @@ public class PostService {
     private final PostRepository postRepository;
 
     public CreatePostResponse createPost(CreatePostRequest request) {
-        var post = mapCreatePostRequestToPost(request);
+        var post = CreatePostRequest.toPost(request);
         log.info("Creating post: {}", post);
         postRepository.save(post);
-        return mapPostToCreatePostResponse(post);
+        return CreatePostResponse.fromPost(post);
     }
 
     public void deletePost(String postId) {
@@ -34,37 +34,15 @@ public class PostService {
     public PostResponse getPostById(String postId) {
         log.info("Getting post with id: {}", postId);
         var post = postRepository.findById(postId).orElseThrow();
-        return mapPostToPostResponse(post);
+        return PostResponse.fromPost(post);
     }
 
     public List<PostResponse> getAllPostsByAuthorId(PostByAuthorRequest request) {
         log.info("Getting all posts by author with id: {}", request.getAuthorId());
         var posts = postRepository.findAllByAuthorId(request.getAuthorId());
         List<PostResponse> postResponses = new ArrayList<>();
-        posts.forEach(post -> postResponses.add(mapPostToPostResponse(post)));
+        posts.forEach(post -> postResponses.add(PostResponse.fromPost(post)));
         return postResponses;
     }
 
-    private Post mapCreatePostRequestToPost(CreatePostRequest post) {
-        return Post.builder()
-                .title(post.getTitle())
-                .content(post.getContent())
-                .authorId(post.getAuthorId())
-                .build();
-    }
-
-    private PostResponse mapPostToPostResponse(Post post) {
-        return PostResponse.builder()
-                .id(post.getId())
-                .title(post.getTitle())
-                .content(post.getContent())
-                .authorId(post.getAuthorId())
-                .build();
-    }
-
-    private CreatePostResponse mapPostToCreatePostResponse(Post post) {
-        return CreatePostResponse.builder()
-                .id(post.getId())
-                .build();
-    }
 }

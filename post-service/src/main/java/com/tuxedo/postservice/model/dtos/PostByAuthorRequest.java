@@ -11,5 +11,4 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PostByAuthorRequest {
     private String authorId;
-
 }

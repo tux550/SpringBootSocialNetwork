@@ -19,10 +19,10 @@ import java.util.UUID;
 public class UserService {
     private final UserRepository userRepository;
     public UserCreateResponse createUser(UserCreateRequest userCreateRequest) {
-        var user = mapUserCreateRequestToUser(userCreateRequest);
+        var user = UserCreateRequest.toUser(userCreateRequest);
         userRepository.save(user);
         log.info("Adding user: {}", user);
-        return mapUserToUserCreateResponse(user);
+        return UserCreateResponse.fromUser(user);
     }
 
     public UserResponse getUser(String id) {
@@ -31,35 +31,16 @@ public class UserService {
             () -> new RuntimeException("User not found")
         );
         log.info("Getting user: {}", user);
-        return mapUserToUserResponse(user);
+        return UserResponse.fromUser(user);
     }
 
     public List<UserResponse> getUsersByIds(UserRequestByIds request) {
         var users = userRepository.findAllById(request.getIds());
         log.info("Getting users: {}", users);
         return users.stream()
-                .map(this::mapUserToUserResponse)
+                .map(UserResponse::fromUser)
                 .toList();
     }
 
-    private User mapUserCreateRequestToUser(UserCreateRequest userCreateRequest) {
-        return User.builder()
-                .firstName(userCreateRequest.getFirstName())
-                .lastName(userCreateRequest.getLastName())
-                .email(userCreateRequest.getEmail())
-                .build();
-    }
-    private UserResponse mapUserToUserResponse(User user) {
-        return UserResponse.builder()
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .email(user.getEmail())
-                .build();
-    }
 
-    private UserCreateResponse mapUserToUserCreateResponse(User user) {
-        return UserCreateResponse.builder()
-                .id(user.getId())
-                .build();
-    }
 }
