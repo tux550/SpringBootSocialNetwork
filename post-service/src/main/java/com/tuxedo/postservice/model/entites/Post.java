@@ -1,9 +1,10 @@
 package com.tuxedo.postservice.model.entites;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Document(collection = "posts")
@@ -18,4 +19,10 @@ public class Post {
     private String title;
     private String content;
     private UUID authorId;
+    @CreatedDate
+    private Long createdAt;
+    @LastModifiedDate
+    private Long lastModifiedAt;
+    @Version
+    private Long version;
 }

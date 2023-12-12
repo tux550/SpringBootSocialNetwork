@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Data
@@ -17,6 +18,8 @@ public class PostResponse {
     private String title;
     private String content;
     private UUID authorId;
+    private Long createdAt;
+    private Long lastModifiedAt;
 
     static public PostResponse fromPost(Post post) {
         return PostResponse.builder()
@@ -24,6 +27,8 @@ public class PostResponse {
                 .title(post.getTitle())
                 .content(post.getContent())
                 .authorId(post.getAuthorId())
+                .createdAt(post.getCreatedAt())
+                .lastModifiedAt(post.getLastModifiedAt())
                 .build();
     }
 }
