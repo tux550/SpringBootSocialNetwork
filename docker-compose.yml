@@ -1,5 +1,6 @@
 version: '3'
 services:
+    #PostgreSQL Users Database
     db-users:
         container_name: db-users
         image: postgres:15.2
@@ -13,3 +14,25 @@ services:
         expose:
           - 5431
         command: -p 5431
+        networks:
+        - ms-network
+    #MongoDB Posts Database
+    db-posts:
+        container_name: db-posts
+        image: mongo:5.0.14
+        restart: unless-stopped
+        environment:
+        - MONGO_INITDB_DATABASE=ms_posts
+        - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+        - MONGO_INITDB_ROOT_PASSWORD=mongoadmin
+        ports:
+        - '27018:27018'
+        expose:
+          - 27018
+        command: --port 27018
+        networks:
+        - ms-network
+#Network
+networks:
+    ms-network:
+        driver: bridge
