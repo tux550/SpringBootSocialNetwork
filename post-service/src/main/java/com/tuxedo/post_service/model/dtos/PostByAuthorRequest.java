@@ -1,4 +1,4 @@
-package com.tuxedo.postservice.model.dtos;
+package com.tuxedo.post_service.model.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

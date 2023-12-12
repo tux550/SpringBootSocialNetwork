@@ -1,18 +1,16 @@
-package com.tuxedo.postservice.services;
+package com.tuxedo.post_service.services;
 
-import com.tuxedo.postservice.model.dtos.CreatePostRequest;
-import com.tuxedo.postservice.model.dtos.CreatePostResponse;
-import com.tuxedo.postservice.model.dtos.PostByAuthorRequest;
-import com.tuxedo.postservice.model.dtos.PostResponse;
-import com.tuxedo.postservice.model.entites.Post;
-import com.tuxedo.postservice.repositories.PostRepository;
+import com.tuxedo.post_service.model.dtos.CreatePostRequest;
+import com.tuxedo.post_service.model.dtos.CreatePostResponse;
+import com.tuxedo.post_service.model.dtos.PostByAuthorRequest;
+import com.tuxedo.post_service.model.dtos.PostResponse;
+import com.tuxedo.post_service.repositories.PostRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor

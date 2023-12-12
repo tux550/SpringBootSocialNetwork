@@ -1,10 +1,9 @@
-package com.tuxedo.postservice.model.entites;
+package com.tuxedo.post_service.model.entites;
 
 import lombok.*;
 import org.springframework.data.annotation.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Document(collection = "posts")

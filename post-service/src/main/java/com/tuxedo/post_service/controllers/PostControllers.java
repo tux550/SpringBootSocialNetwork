@@ -1,16 +1,15 @@
-package com.tuxedo.postservice.controllers;
+package com.tuxedo.post_service.controllers;
 
-import com.tuxedo.postservice.model.dtos.CreatePostRequest;
-import com.tuxedo.postservice.model.dtos.CreatePostResponse;
-import com.tuxedo.postservice.model.dtos.PostByAuthorRequest;
-import com.tuxedo.postservice.model.dtos.PostResponse;
-import com.tuxedo.postservice.services.PostService;
+import com.tuxedo.post_service.model.dtos.CreatePostRequest;
+import com.tuxedo.post_service.model.dtos.CreatePostResponse;
+import com.tuxedo.post_service.model.dtos.PostByAuthorRequest;
+import com.tuxedo.post_service.model.dtos.PostResponse;
+import com.tuxedo.post_service.services.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping

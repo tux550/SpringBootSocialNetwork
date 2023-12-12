@@ -1,12 +1,11 @@
-package com.tuxedo.postservice.model.dtos;
+package com.tuxedo.post_service.model.dtos;
 
-import com.tuxedo.postservice.model.entites.Post;
+import com.tuxedo.post_service.model.entites.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Data
