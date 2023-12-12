@@ -4,6 +4,8 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.UUID;
+
 @Document(collection = "posts")
 @Getter
 @Setter
@@ -15,5 +17,5 @@ public class Post {
     private String id;
     private String title;
     private String content;
-    private String authorId;
+    private UUID authorId;
 }

@@ -3,6 +3,8 @@ package com.tuxedo.postservice.model.dtos;
 import com.tuxedo.postservice.model.entites.Post;
 import lombok.*;
 
+import java.util.UUID;
+
 
 @Data
 @AllArgsConstructor
@@ -11,7 +13,7 @@ import lombok.*;
 public class CreatePostRequest {
     private String title;
     private String content;
-    private String authorId;
+    private UUID authorId;
 
 
     static public Post toPost(CreatePostRequest request) {

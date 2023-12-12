@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,7 +16,7 @@ public class PostResponse {
     private String id;
     private String title;
     private String content;
-    private String authorId;
+    private UUID authorId;
 
     static public PostResponse fromPost(Post post) {
         return PostResponse.builder()
