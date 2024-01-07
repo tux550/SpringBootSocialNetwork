@@ -11,6 +11,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserRequestByIds {
+public class UserGetRequestByIds {
     private List<UUID> ids;
 }

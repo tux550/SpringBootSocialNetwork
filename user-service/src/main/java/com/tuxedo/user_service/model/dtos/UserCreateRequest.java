@@ -15,11 +15,11 @@ public class UserCreateRequest {
     private String lastName;
     private String email;
 
-    public static User toUser(UserCreateRequest userCreateRequest) {
+    public User toUser() {
         return User.builder()
-                .firstName(userCreateRequest.getFirstName())
-                .lastName(userCreateRequest.getLastName())
-                .email(userCreateRequest.getEmail())
+                .firstName(this.getFirstName())
+                .lastName(this.getLastName())
+                .email(this.getEmail())
                 .build();
     }
 }

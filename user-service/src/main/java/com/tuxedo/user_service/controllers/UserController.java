@@ -1,9 +1,9 @@
 package com.tuxedo.user_service.controllers;
 
 import com.tuxedo.user_service.model.dtos.UserCreateResponse;
-import com.tuxedo.user_service.model.dtos.UserRequestByIds;
+import com.tuxedo.user_service.model.dtos.UserGetRequestByIds;
 import com.tuxedo.user_service.model.dtos.UserCreateRequest;
-import com.tuxedo.user_service.model.dtos.UserResponse;
+import com.tuxedo.user_service.model.dtos.UserGetResponse;
 import com.tuxedo.user_service.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,12 +24,12 @@ public class UserController {
     }
 
     @GetMapping("/api/v1/users")
-    public List<UserResponse> getUser(@RequestBody UserRequestByIds request) {
+    public List<UserGetResponse> getUser(@RequestBody UserGetRequestByIds request) {
         return userService.getUsersByIds(request);
     }
 
     @GetMapping("/api/v1/users/{id}")
-    public UserResponse getUser(@PathVariable("id") String id) {
+    public UserGetResponse getUser(@PathVariable("id") String id) {
         return userService.getUser(id);
     }
 }
