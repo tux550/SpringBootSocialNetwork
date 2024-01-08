@@ -1,7 +1,6 @@
 package com.tuxedo.social_service.controllers;
 
 import com.tuxedo.social_service.model.dtos.UserCreateRequest;
-import com.tuxedo.social_service.model.dtos.UserFollowRequest;
 import com.tuxedo.social_service.model.dtos.UserFollowResponse;
 import com.tuxedo.social_service.services.SocialService;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +21,9 @@ public class SocialController {
         socialService.createUser(userCreateRequest);
     }
 
-    @PostMapping("/api/v1/social/user/{id}/follows")
-    public void createFollow(@PathVariable UUID id, @RequestBody UserFollowRequest userFollowRequest) {
-        socialService.createFollow(id, userFollowRequest.getTargetId());
+    @PostMapping("/api/v1/social/user/{id}/follows/{targetId}")
+    public void createFollow(@PathVariable UUID id, @PathVariable UUID targetId) {
+        socialService.createFollow(id, targetId);
     }
 
     @GetMapping("/api/v1/social/user/{id}/follows")
