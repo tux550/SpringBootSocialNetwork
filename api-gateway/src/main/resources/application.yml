@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      mvc:
+        routes: # Routes for all services
+          - id: user-service
+            uri: http://localhost:8081
+            predicates:
+              - Path=/api/users/**
+          - id: posts-service
+            uri: http://localhost:8082
+            predicates:
+              - Path=/api/posts/**
+          - id: comments-service
+            uri: http://localhost:8083
+            predicates:
+              - Path=/api/comments/**
+          - id: social-service
+            uri: http://localhost:8084
+            predicates:
+              - Path=/api/social/**

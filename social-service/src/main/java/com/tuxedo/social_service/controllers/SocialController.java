@@ -12,41 +12,41 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@Slf4j
+@RequestMapping("/api/social")
 public class SocialController {
     private final SocialService socialService;
 
-    @PostMapping("/api/v1/social/user")
+    @PostMapping("/user")
     public void createUser(@RequestBody UserCreateRequest userCreateRequest) {
         socialService.createUser(userCreateRequest);
     }
 
-    @PostMapping("/api/v1/social/user/{id}/follows/{targetId}")
+    @PostMapping("/user/{id}/follows/{targetId}")
     public void createFollow(@PathVariable UUID id, @PathVariable UUID targetId) {
         socialService.createFollow(id, targetId);
     }
 
-    @GetMapping("/api/v1/social/user/{id}/follows")
+    @GetMapping("/user/{id}/follows")
     public List<UserFollowResponse> getFollows(@PathVariable UUID id) {
         return socialService.getFollows(id);
     }
 
-    @GetMapping("/api/v1/social/user/{id}/followers")
+    @GetMapping("/user/{id}/followers")
     public List<UserFollowResponse> getFollowers(@PathVariable UUID id) {
         return socialService.getFollowers(id);
     }
 
-    @PutMapping("/api/v1/social/user/{id}/follows/{targetId}")
+    @PutMapping("/user/{id}/follows/{targetId}")
     public void acceptFollow(@PathVariable UUID id, @PathVariable UUID targetId) {
         socialService.acceptFollow(id, targetId);
     }
 
-    @DeleteMapping("/api/v1/social/user/{id}/follows/{targetId}")
+    @DeleteMapping("/user/{id}/follows/{targetId}")
     public void deleteFriendship(@PathVariable UUID id, @PathVariable UUID targetId) {
         socialService.deleteFollow(id, targetId);
     }
 
-    @GetMapping("/api/v1/social/user/{id}/follows/{targetId}")
+    @GetMapping("/user/{id}/follows/{targetId}")
     public UserFollowResponse getFollow(@PathVariable UUID id, @PathVariable UUID targetId) {
         return socialService.getFollow(id, targetId);
     }
