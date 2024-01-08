@@ -1,4 +1,4 @@
-package com.tuxedo.friendship_service.model.entities;
+package com.tuxedo.social_service.model.entities;
 import lombok.*;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
@@ -6,6 +6,7 @@ import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
 import java.util.Set;
+import java.util.UUID;
 
 
 @Node
@@ -15,25 +16,24 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 public class User {
-    @Id @GeneratedValue
-    private Long id;
-    private String userId;
-    @Relationship(type = "FRIENDS_WITH", direction = Relationship.Direction.OUTGOING)
-    private Set<Friendship> friends;
+    @Id
+    private UUID userId;
 
-    public void addFriend(Friendship friendship) {
-        if (friends == null) {
-            friends = Set.of();
+    @Relationship(type = "FOLLOWS", direction = Relationship.Direction.OUTGOING)
+    private Set<Follow> follows;
+
+    public void addFollow(Follow follow) {
+        if (follows == null) {
+            follows = Set.of();
         }
-        friends.add(friendship);
+        follows.add(follow);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
                 ", userId='" + userId + '\'' +
-                ", friends=" + friends +
+                ", follows=" + follows +
                 '}';
     }
 }

@@ -1,4 +1,4 @@
-package com.tuxedo.friendship_service.model.entities;
+package com.tuxedo.social_service.model.entities;
 
 import lombok.*;
 import org.springframework.data.neo4j.core.schema.*;
@@ -10,18 +10,18 @@ import org.springframework.data.neo4j.core.schema.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Friendship {
+public class Follow {
     @RelationshipId @GeneratedValue
     private Long id;
     @TargetNode
-    private User friend;
+    private User followTarget;
     private String status;
 
     @Override
     public String toString() {
-        return "Friendship{" +
+        return "Follow{" +
                 "id=" + id +
-                ", friend=" + friend +
+                ", friend=" + followTarget +
                 ", status='" + status + '\'' +
                 '}';
     }

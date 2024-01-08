@@ -1,21 +1,23 @@
-package com.tuxedo.friendship_service.model.dtos;
+package com.tuxedo.social_service.model.dtos;
 
-import com.tuxedo.friendship_service.model.entities.User;
+import com.tuxedo.social_service.model.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class UserCreateRequest {
-    private String userId;
+    private UUID userId;
 
-    static public User toUser(UserCreateRequest userCreateRequest) {
+    public User toUser() {
         return User.builder()
-                .userId(userCreateRequest.getUserId())
+                .userId(userId)
                 .build();
     }
 }

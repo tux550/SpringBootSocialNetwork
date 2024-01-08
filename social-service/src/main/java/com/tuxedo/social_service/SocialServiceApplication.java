@@ -1,4 +1,4 @@
-package com.tuxedo.friendship_service;
+package com.tuxedo.social_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 
 @SpringBootApplication
 @EnableNeo4jRepositories
-public class FriendshipServiceApplication {
+public class SocialServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FriendshipServiceApplication.class, args);
+		SpringApplication.run(SocialServiceApplication.class, args);
 	}
 
 }
