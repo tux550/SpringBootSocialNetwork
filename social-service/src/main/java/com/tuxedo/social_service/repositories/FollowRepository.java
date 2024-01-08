@@ -15,11 +15,17 @@ public interface FollowRepository extends Neo4jRepository<Follow, Long> {
             "DELETE f")
     void deleteFollowByUserIdAndTargetId(UUID userId, UUID targetId);
 
+    // Update follow status
+    @Query("MATCH (u1:User)-[f:FOLLOWS]->(u2:User) " +
+            "WHERE u1.userId = $userId AND u2.userId = $targetId " +
+            "SET f.status = $status")
+    void updateFollowStatus(UUID userId, UUID targetId, String status);
+
     // Find if user follows target
     @Query("MATCH (u1:User)-[f:FOLLOWS]->(u2:User) " +
             "WHERE u1.userId = $userId AND u2.userId = $targetId " +
             "RETURN id(f) AS id, u1.userId AS userId, u2.userId AS targetId, f.status AS status")
-    List<FollowQueryResult> findFollowByUserIdAndTargetId(UUID userId, UUID targetId);
+    List<FollowQueryResult> getFollow(UUID userId, UUID targetId);
 
     // Get follows of user
     @Query("MATCH (u1:User)-[f:FOLLOWS]->(u2:User) " +

@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -30,13 +31,27 @@ public class SocialService {
     public void createFollow(UUID id, UUID targetId) {
         var user = userRepository.findByUserId(id);
         var followTarget = userRepository.findByUserId(targetId);
+        // Check if already in follows
+        var follows = user.getFollows();
+        Optional<Follow> follow = follows.stream()
+                .filter(f -> f.getFollowTarget().getUserId().equals(targetId))
+                .findFirst();
+        if (follow.isPresent()) {
+            // Already Exists
+            return;
+        }
+        // Create
         user.addFollow(
             Follow.builder()
                 .followTarget(followTarget)
-                .status("PENDING")
+                .status(Follow.Status.PENDING)
                 .build()
         );
         userRepository.save(user);
+    }
+
+    public void acceptFollow(UUID id, UUID targetId) {
+        followRepository.updateFollowStatus(id, targetId, Follow.Status.ACCEPTED);
     }
 
     public void deleteFollow(UUID id, UUID targetId) {
@@ -44,10 +59,10 @@ public class SocialService {
     }
 
     public UserFollowResponse getFollow(UUID id, UUID targetId) {
-        var follow = followRepository.findFollowByUserIdAndTargetId(id, targetId);
-        return  follow.stream()
-                .map(FollowQueryResult::toUserFollowResponse)
+        var follow = followRepository.getFollow(id, targetId);
+        return follow.stream()
                 .findFirst()
+                .map(FollowQueryResult::toUserFollowResponse)
                 .orElseThrow();
     }
 

@@ -11,6 +11,11 @@ import org.springframework.data.neo4j.core.schema.*;
 @NoArgsConstructor
 @Builder
 public class Follow {
+    public static class Status {
+        public static final String PENDING = "PENDING";
+        public static final String ACCEPTED = "ACCEPTED";
+    }
+
     @RelationshipId @GeneratedValue
     private Long id;
     @TargetNode

@@ -48,9 +48,9 @@ services:
         command: --port 27019
         networks:
             - ms-network
-    #Neo4j Friendships Database
-    db-friendships:
-        container_name: db-friendships
+    #Neo4j Social Graph Database
+    db-social:
+        container_name: db-social
         image: neo4j:4.3.6
         restart: unless-stopped
         environment:

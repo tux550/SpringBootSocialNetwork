@@ -23,12 +23,12 @@ public class SocialController {
     }
 
     @PostMapping("/api/v1/social/user/{id}/follows")
-    public void createFriendship(@PathVariable UUID id, @RequestBody UserFollowRequest userFollowRequest) {
+    public void createFollow(@PathVariable UUID id, @RequestBody UserFollowRequest userFollowRequest) {
         socialService.createFollow(id, userFollowRequest.getTargetId());
     }
 
     @GetMapping("/api/v1/social/user/{id}/follows")
-    public List<UserFollowResponse> getFriends(@PathVariable UUID id) {
+    public List<UserFollowResponse> getFollows(@PathVariable UUID id) {
         return socialService.getFollows(id);
     }
 
@@ -37,13 +37,18 @@ public class SocialController {
         return socialService.getFollowers(id);
     }
 
+    @PutMapping("/api/v1/social/user/{id}/follows/{targetId}")
+    public void acceptFollow(@PathVariable UUID id, @PathVariable UUID targetId) {
+        socialService.acceptFollow(id, targetId);
+    }
+
     @DeleteMapping("/api/v1/social/user/{id}/follows/{targetId}")
     public void deleteFriendship(@PathVariable UUID id, @PathVariable UUID targetId) {
         socialService.deleteFollow(id, targetId);
     }
 
     @GetMapping("/api/v1/social/user/{id}/follows/{targetId}")
-    public UserFollowResponse getFriend(@PathVariable UUID id, @PathVariable UUID targetId) {
+    public UserFollowResponse getFollow(@PathVariable UUID id, @PathVariable UUID targetId) {
         return socialService.getFollow(id, targetId);
     }
 
