@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -36,9 +37,10 @@ public class PostService {
         return PostResponse.fromPost(post);
     }
 
-    public List<PostResponse> getAllPostsByAuthorId(PostByAuthorRequest request) {
-        log.info("Getting all posts by author with id: {}", request.getAuthorId());
-        var posts = postRepository.findAllByAuthorId(request.getAuthorId());
+    //public List<PostResponse> getAllPostsByAuthorId(PostByAuthorRequest request) {
+    public List<PostResponse> getAllPostsByAuthorId(UUID authorId) {
+        log.info("Getting all posts by author with id: {}", authorId);
+        var posts = postRepository.findAllByAuthorId(authorId);
         List<PostResponse> postResponses = new ArrayList<>();
         posts.forEach(post -> postResponses.add(PostResponse.fromPost(post)));
         return postResponses;
