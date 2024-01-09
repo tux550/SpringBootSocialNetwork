@@ -11,23 +11,23 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/v1/comments")
 @RequiredArgsConstructor
 public class CommentController {
     final private CommentService commentService;
 
-    @PostMapping("/comments")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public CreateCommentResponse createComment(@RequestBody CreateCommentRequest request) {
         return commentService.createComment(request);
     }
 
-    @GetMapping("/comments/{id}")
+    @GetMapping("/{id}")
     public CommentResponse getComment(@PathVariable("id") String commentId) {
         return commentService.getComment(commentId);
     }
 
-    @DeleteMapping("/comments/{id}")
+    @DeleteMapping("/{id}")
     public void deleteComment(@PathVariable("id") String commentId) {
         commentService.deleteComment(commentId);
     }

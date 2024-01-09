@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/social")
+@RequestMapping("/v1/social")
 public class SocialController {
     private final SocialService socialService;
 
