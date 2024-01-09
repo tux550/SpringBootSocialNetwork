@@ -1,24 +1,33 @@
 server:
   port: 8080
 
+eureka:
+  client:
+    serviceUrl:
+        defaultZone: http://localhost:8761/eureka/
+  instance:
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
 spring:
+  application:
+    name: api-gateway
   cloud:
     gateway:
       mvc:
         routes: # Routes for all services
           - id: users-service
-            uri: http://localhost:8081
+            uri: lb://ms-users
             predicates:
               - Path=/users-service/**
           - id: posts-service
-            uri: http://localhost:8082
+            uri: lb://ms-posts
             predicates:
               - Path=/posts-service/**
           - id: comments-service
-            uri: http://localhost:8083
+            uri: lb://ms-comments
             predicates:
               - Path=/comments-service/**
           - id: social-service
-            uri: http://localhost:8084
+            uri: lb://ms-social
             predicates:
               - Path=/social-service/**
