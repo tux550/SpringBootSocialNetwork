@@ -16,7 +16,7 @@ import java.util.UUID;
 public class SocialController {
     private final SocialService socialService;
 
-    @PostMapping("/user")
+    @PostMapping("/users")
     public void createUser(@RequestBody UserCreateRequest userCreateRequest) {
         socialService.createUser(userCreateRequest);
     }
