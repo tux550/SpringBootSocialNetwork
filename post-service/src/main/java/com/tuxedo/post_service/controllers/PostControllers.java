@@ -12,28 +12,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/posts")
+@RequestMapping("/posts-service/v1")
 @RequiredArgsConstructor
 public class PostControllers {
     private final PostService postService;
 
-    @GetMapping("")
+    @GetMapping("/posts")
     public List<PostResponse> getAllPostsByAuthorId(@RequestBody PostByAuthorRequest request) {
         return postService.getAllPostsByAuthorId(request);
     }
 
-    @PostMapping("")
+    @PostMapping("/posts")
     @ResponseStatus(HttpStatus.CREATED)
     public CreatePostResponse createPost(@RequestBody CreatePostRequest request) {
         return postService.createPost(request);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/posts/{id}")
     public void deletePost(@PathVariable("id") String postId) {
         postService.deletePost(postId);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/posts/{id}")
     public PostResponse getPostById(@PathVariable("id") String postId) {
         return postService.getPostById(postId);
     }

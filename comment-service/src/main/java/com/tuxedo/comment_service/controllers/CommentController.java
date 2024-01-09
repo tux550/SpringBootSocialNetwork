@@ -11,33 +11,33 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/v1/comments")
+@RequestMapping("/comments-service/v1")
 @RequiredArgsConstructor
 public class CommentController {
     final private CommentService commentService;
 
-    @PostMapping("")
+    @PostMapping("/comments")
     @ResponseStatus(HttpStatus.CREATED)
     public CreateCommentResponse createComment(@RequestBody CreateCommentRequest request) {
         return commentService.createComment(request);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/comments/{id}")
     public CommentResponse getComment(@PathVariable("id") String commentId) {
         return commentService.getComment(commentId);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/comments/{id}")
     public void deleteComment(@PathVariable("id") String commentId) {
         commentService.deleteComment(commentId);
     }
 
-    @GetMapping("/post/{postId}/comments")
+    @GetMapping("/posts/{postId}/comments")
     public List<CommentResponse> getAllCommentsByPostId(@PathVariable("postId") String postId) {
         return commentService.getAllCommentsByPostId(postId);
     }
 
-    @GetMapping("/user/{authorId}/comments")
+    @GetMapping("/users/{authorId}/comments")
     public List<CommentResponse> getAllCommentsByAuthorId(@PathVariable("authorId") UUID authorId) {
         return commentService.getAllCommentsByAuthorId(authorId);
     }

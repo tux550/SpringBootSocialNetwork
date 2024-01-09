@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1/social")
+@RequestMapping("/social-service/v1")
 public class SocialController {
     private final SocialService socialService;
 
@@ -21,32 +21,32 @@ public class SocialController {
         socialService.createUser(userCreateRequest);
     }
 
-    @PostMapping("/user/{id}/follows/{targetId}")
+    @PostMapping("/users/{id}/follows/{targetId}")
     public void createFollow(@PathVariable UUID id, @PathVariable UUID targetId) {
         socialService.createFollow(id, targetId);
     }
 
-    @GetMapping("/user/{id}/follows")
+    @GetMapping("/users/{id}/follows")
     public List<UserFollowResponse> getFollows(@PathVariable UUID id) {
         return socialService.getFollows(id);
     }
 
-    @GetMapping("/user/{id}/followers")
+    @GetMapping("/users/{id}/followers")
     public List<UserFollowResponse> getFollowers(@PathVariable UUID id) {
         return socialService.getFollowers(id);
     }
 
-    @PutMapping("/user/{id}/follows/{targetId}")
+    @PutMapping("/users/{id}/follows/{targetId}")
     public void acceptFollow(@PathVariable UUID id, @PathVariable UUID targetId) {
         socialService.acceptFollow(id, targetId);
     }
 
-    @DeleteMapping("/user/{id}/follows/{targetId}")
+    @DeleteMapping("/users/{id}/follows/{targetId}")
     public void deleteFriendship(@PathVariable UUID id, @PathVariable UUID targetId) {
         socialService.deleteFollow(id, targetId);
     }
 
-    @GetMapping("/user/{id}/follows/{targetId}")
+    @GetMapping("/users/{id}/follows/{targetId}")
     public UserFollowResponse getFollow(@PathVariable UUID id, @PathVariable UUID targetId) {
         return socialService.getFollow(id, targetId);
     }

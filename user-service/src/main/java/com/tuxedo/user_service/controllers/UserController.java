@@ -12,23 +12,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/users")
+@RequestMapping("/users-service/v1")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("")
+    @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
     public UserCreateResponse createUser(@RequestBody UserCreateRequest user) {
         return userService.createUser(user);
     }
 
-    @GetMapping("")
+    @GetMapping("/users")
     public List<UserGetResponse> getUser(@RequestBody UserGetRequestByIds request) {
         return userService.getUsersByIds(request);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/users/{id}")
     public UserGetResponse getUser(@PathVariable("id") String id) {
         return userService.getUser(id);
     }
